@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from "./Header";
 import CharacterForm from "./CharacterForm";
 import CharacterContainer from "./CharacterContainer";
+import LocationContainer from "./LocationContainer";
 import Episodes from "./Episodes";
 import Locations from "./Locations";
 import ErrorPage from "./ErrorPage";
