@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from "./Header";
 import CharacterForm from "./CharacterForm";
-import CharacterCard from "./CharacterContainer";
+import CharacterContainer from "./CharacterContainer";
+import Episodes from "./Episodes";
+import Locations from "./Locations";
+import ErrorPage from "./ErrorPage";
 
-const rickAPI = "http://localhost:3001/results";
+const API = "http://localhost:3001/characters";
 
 //potentially do all the destructuring here or in the CharacterCard component
 
@@ -17,12 +21,15 @@ function App() {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
-    fetch(rickAPI)
-      .then((res) => res.json())
-      .then((data) => setCharacters(data));
+    //use IIFE or Axios
+    (async function () {
+      let data = await fetch(API).then((res) => res.json()); //returns a promise amd converts to json
+      setCharacters(data);
+      console.log("characters", data);
+      //user setter to setjson data to state
+    })();
   }, []);
-
-  console.log(characters);
+  //whenever API changes, change data in state
 
   function handleClick() {
     setShowForm((showForm) => !showForm);
@@ -30,7 +37,7 @@ function App() {
 
   //fetch doent take an object,so we need to convert it to a string
   function addCharacter(char) {
-    fetch(rickAPI, {
+    fetch(API, {
       method: "POST",
       headers,
       body: JSON.stringify(char),
@@ -41,7 +48,7 @@ function App() {
 
   function deleteCharacter(id) {
     console.log("deleting", id);
-    fetch(`${rickAPI}/${id}`, {
+    fetch(`${API}/${id}`, {
       method: "DELETE",
       headers,
     }).then(
@@ -50,7 +57,7 @@ function App() {
   }
 
   function incrementLikes(char) {
-    fetch(`${rickAPI}/${char.id}`, {
+    fetch(`${API}/${char.id}`, {
       method: "PATCH",
       headers,
       body: JSON.stringify({ likes: char.likes + 1 }),
@@ -67,18 +74,39 @@ function App() {
   }
 
   return (
-    <>
+    <Router>
       <Header />
+      <nav>
+        <Link to="/" className="nav">
+          Characters
+        </Link>
+        <Link to="/episodes" className="nav">
+          Episodes
+        </Link>
+        <Link to="/locations" className="nav">
+          Locations
+        </Link>
+      </nav>
       {showForm ? <CharacterForm handleSubmit={addCharacter} /> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Character</button>
       </div>
-      <CharacterCard
-        characters={characters}
-        handleDelete={deleteCharacter}
-        handleClickLikes={incrementLikes}
-      />
-    </>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <CharacterContainer
+              characters={characters}
+              handleDelete={deleteCharacter}
+              handleClickLikes={incrementLikes}
+            />
+          }
+        />
+        <Route path="/episodes" element={<Episodes />} />
+        <Route path="/locations" element={<Locations />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </Router>
   );
 }
 

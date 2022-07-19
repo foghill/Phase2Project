@@ -40,7 +40,7 @@ body {
 
 button {
   position: relative;
-  background-color: #e04b52;
+  background-color: #69c8ecff;
   border: none;
   border-radius: 5px;
   height: 3rem;
@@ -97,6 +97,19 @@ button:hover {
   height: 2rem;
   width: 60%;
   font-size: 18px;
+  font-family: monospace;
+  margin: 3px;
+}
+
+.nav {
+  position: relative;
+  background-color: #e04b52;
+  border-radius: 5px;
+  height: 2rem;
+  width: max-content;
+  color: whitesmoke;
+  font-size: 18px;
+  justify-self: center;
   font-family: monospace;
   margin: 3px;
 }
