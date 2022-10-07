@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Rick and Morty Wikipedia
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+At its core, this web app is a minimal interface for searching across the TV show Rick and Morty's compendium including character data, locations and episode facts.
 
-## Available Scripts
+## Rick and Morty API
 
-In the project directory, you can run:
+All data comes from the [Rick and Morty API](https://rickandmortyapi.com/)
 
-### `npm start`
+A working demo of this app has been hosted on Netlify and can be [accessed here](https://rickandmortyflatiron.netlify.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The API is called in the App.js file using the useEffect hook and an [Immediately Invoked Function Expression](https://www.javascripttutorial.net/javascript-immediately-invoked-function-expression-iife/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The API returns three important resources in the object: Characters, Locations, Episodes.
 
-### `npm test`
+The API paginate's the response, and returns 20 records per page. [Pagination npm package](https://academind.com/tutorials/reactjs-pagination) was used to help build the navigation and interface.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## The npm packages used are:
 
-### `npm run build`
+[Bootstrap](https://getbootstrap.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[Sass](https://www.npmjs.com/package/sass)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Sass helps create custom stylesheets for components, here is how to [add sass to react](https://medium.com/nerd-for-tech/add-sass-to-your-react-app-in-2021-here-is-how-c7260c323a5a)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[React-Router-DOM](https://www.npmjs.com/package/react-router-dom)
 
-### `npm run eject`
+[React Paginate](https://www.npmjs.com/package/react-paginate)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Paginate is an awesome package which helps create a page navigation bar
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## App Breakdown
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![](rickandmorty.gif)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+The web app is split up across a few different components including but not limited to:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Homepage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The Homepage is the entry point for the app, and acts as a Character page. A Filter component is displayed along the left column which allows a filter functionality to isolate across [Status,Species,Gender]
 
-### Code Splitting
+A Navbar displays the other components: Episode and Location.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+A Searchbar component is also displayed, allowing the user to search for characters across the entire compendium.
 
-### Analyzing the Bundle Size
+### Characters Cards
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Clicking on a character will bring up another component: their specific character attributes
 
-### Making a Progressive Web App
+This includes a dynamic button which renders green if the character is currently alive in the series, or red if the character is dead. The other attributes pulled from the API are Gender, Origin, Location and Species.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Episode
 
-### Advanced Configuration
+On this component, an accordion on the left hand side allows one to choose any episode across all 51. Depending on the episode chosen, the characters that appear in that particular episode will populate the page. Character cards can also be accessed through this interface.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Location
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Similarly to the episode page, an accordion on the left hand page appears, this time allowing the user to select among all 126 known locations in the series. Once a location is chosen, all the characters currently residing in this particular location will populate, and can also be accessed directly through their Character Card.
