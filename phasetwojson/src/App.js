@@ -7,6 +7,7 @@ import Episodes from "./Episodes";
 import Locations from "./Locations";
 import ErrorPage from "./ErrorPage";
 import AppBar from "./AppBar";
+import Album from "./Album.js";
 
 const API = "http://localhost:3001/characters";
 
@@ -77,7 +78,6 @@ function App() {
   return (
     <Router>
       <Header />
-      <AppBar />
       <nav>
         <Link to="/" className="nav">
           Characters
