@@ -1,21 +1,37 @@
 import React from "react";
+import { Card, Icon, Image } from "semantic-ui-react";
+import { Button, Label } from "semantic-ui-react";
 
 function CharacterCard({ characterData, handleDelete, handleClickLikes }) {
   const { id, status, name, species, image, likes } = characterData;
   return (
-    <div className="card">
+    <div className="ui card">
       <h2>{name}</h2>
       <img src={image} alt={name} className="char-avatar" />
-      <p>{likes} Likes </p>
-      <button onClick={() => handleDelete(id)} className="del-btn">
-        Delete
-      </button>
-      <button
+
+      <Button
+        as="div"
+        labelPosition="right"
         onClick={() => handleClickLikes(characterData)}
-        className="like-btn"
       >
-        Like {"<3"}
-      </button>
+        <Button color="red">
+          <Icon name="heart" />
+          Like
+        </Button>
+        <Label as="a" basic color="red" pointing="left">
+          {likes}
+        </Label>
+      </Button>
+      <Button
+        as="div"
+        labelPosition="right"
+        onClick={() => handleClickLikes(characterData)}
+      >
+        <Button basic color="blue">
+          <Icon name="fork" />
+          Delete
+        </Button>
+      </Button>
     </div>
   );
 }

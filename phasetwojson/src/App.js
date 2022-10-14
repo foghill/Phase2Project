@@ -8,6 +8,8 @@ import Locations from "./Locations";
 import ErrorPage from "./ErrorPage";
 import AppBar from "./AppBar";
 import Album from "./Album.js";
+import CardExampleCard from "./CardExampleCard";
+import { Icon, Label } from 'semantic-ui-react'
 
 const API = "http://localhost:3001/characters";
 
@@ -79,13 +81,13 @@ function App() {
     <Router>
       <Header />
       <nav>
-        <Link to="/" className="nav">
+        <Link to="/" className="ui image label">
           Characters
         </Link>
-        <Link to="/episodes" className="nav">
+        <Link to="/episodes" className="ui image label">
           Episodes
         </Link>
-        <Link to="/locations" className="nav">
+        <Link to="/locations" className="ui image label">
           Locations
         </Link>
       </nav>
