@@ -18,9 +18,9 @@ function CharacterForm({ handleSubmit }) {
   }
 
   return (
-    <div className="container">
-      <form className="add-char-form" onSubmit={onSubmit}>
-        <h3>Create a Character!</h3>
+    <div className="ui segment">
+      <form className="ui form" onSubmit={onSubmit}>
+        <h3>Add a Character!</h3>
         <input
           type="text"
           name="name"
@@ -45,7 +45,7 @@ function CharacterForm({ handleSubmit }) {
           type="submit"
           name="submit"
           value="Create New Character"
-          className="submit"
+          className="ui secondary button"
         />
       </form>
     </div>

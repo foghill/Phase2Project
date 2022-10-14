@@ -93,7 +93,7 @@ function App() {
       </nav>
       {showForm ? <CharacterForm handleSubmit={addCharacter} /> : null}
       <div className="buttonContainer">
-        <button onClick={handleClick}>Add a Character</button>
+        <button onClick={handleClick} class="ui primary button">Add a Character</button>
       </div>
       <Routes>
         <Route

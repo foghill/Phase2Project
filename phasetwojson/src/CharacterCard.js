@@ -25,7 +25,7 @@ function CharacterCard({ characterData, handleDelete, handleClickLikes }) {
       <Button
         as="div"
         labelPosition="right"
-        onClick={() => handleClickLikes(characterData)}
+        onClick={() => handleDelete(id)}
       >
         <Button basic color="blue">
           <Icon name="fork" />
