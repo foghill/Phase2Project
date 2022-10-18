@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Menu, Segment } from 'semantic-ui-react'
 import Header from "./Header";
 import CharacterForm from "./CharacterForm";
 import CharacterContainer from "./CharacterContainer";
 import Episodes from "./Episodes";
 import Locations from "./Locations";
 import ErrorPage from "./ErrorPage";
-import AppBar from "./AppBar";
-import Album from "./Album.js";
-import CardExampleCard from "./CardExampleCard";
 import { Icon, Label } from 'semantic-ui-react'
 
 const API = "http://localhost:3001/characters";
@@ -80,20 +78,23 @@ function App() {
   return (
     <Router>
       <Header />
-      <nav>
-        <Link to="/" className="ui image label">
+      <nav class="ui menu">
+        <Link to="/" class="item">
           Characters
         </Link>
-        <Link to="/episodes" className="ui image label">
+        <Link to="/episodes" class="item">
           Episodes
         </Link>
-        <Link to="/locations" className="ui image label">
+        <Link to="/locations" class="item">
           Locations
         </Link>
+        <Link to="/characterform" class="item">
+          Add a Character Form
+        </Link>
       </nav>
-      {showForm ? <CharacterForm handleSubmit={addCharacter} /> : null}
+    {showForm ? <CharacterForm handleSubmit={addCharacter} /> : null}
       <div className="buttonContainer">
-        <button onClick={handleClick} class="ui primary button">Add a Character</button>
+        {/* <button onClick={handleClick} class="ui primary button">Add a Character</button> */}
       </div>
       <Routes>
         <Route
@@ -105,10 +106,14 @@ function App() {
               handleClickLikes={incrementLikes}
             />
           }
+          
         />
+        
         <Route path="/episodes" element={<Episodes />} />
         <Route path="/locations" element={<Locations />} />
+        <Route path="/characterform" element={<CharacterForm />} />
         <Route path="*" element={<ErrorPage />} />
+        
       </Routes>
     </Router>
   );

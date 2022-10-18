@@ -18,7 +18,7 @@ function CharacterForm({ handleSubmit }) {
   }
 
   return (
-    <div className="ui segment">
+    <div className="ui center aligned grid">
       <form className="ui form" onSubmit={onSubmit}>
         <h3>Add a Character!</h3>
         <input

@@ -3,7 +3,7 @@ import CharacterCard from "./CharacterCard";
 
 function Character({ characters, handleDelete, handleClickLikes }) {
   return (
-    <div id="char-collection">
+    <div class="ui center aligned grid">
       {characters.map((characterData) => (
         <CharacterCard
           key={characterData.id}
