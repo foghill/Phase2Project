@@ -395,6 +395,11 @@
       ],
       "url": "https://rickandmortyapi.com/api/character/20",
       "created": "2017-11-04T22:34:53.659Z"
+    },
+    {
+      "name": "ben",
+      "image": "https://api.lorem.space/image/face?w=150&h=150",
+      "id": 22
     }
   ],
   "locations": [
