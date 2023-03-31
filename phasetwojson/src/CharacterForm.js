@@ -5,23 +5,22 @@ function CharacterForm({ handleSubmit }) {
   const [image, setImage] = useState("");
   const [id, setId] = useState("");
 
-
-  
+  /* This code is a function that handles the submission of a form. It prevents the default behavior of the form, and then creates a new object called newCharacter. The newCharacter object contains the name, image, and id of the character. The handleSubmit function is called on this newCharacter object. The name, image, and id are all set to an empty string to clear the form. */
 
   function onSubmit(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const newCharacter = {
-    name,
-    image,
-    id,
-  };
+    const newCharacter = {
+      name,
+      image,
+      id,
+    };
 
-  handleSubmit(newCharacter);
-  setName("");
-  setImage("");
-  setId("");
-}
+    handleSubmit(newCharacter);
+    setName("");
+    setImage("");
+    setId("");
+  }
 
   return (
     <div className="ui center aligned grid">
