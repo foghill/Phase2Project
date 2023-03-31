@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Message } from "semantic-ui-react";
 
-function CharacterForm({ handleSubmit }) {
+function CharacterForm({ handleAddCharacter}) {
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -11,7 +12,7 @@ function CharacterForm({ handleSubmit }) {
     const newCharacter = {
       name,
       image: `https://api.lorem.space/image/face?w=150&h=150`,
-      likes: 0
+      likes: 0,
     };
 
     fetch("http://localhost:3001/characters", {
@@ -24,16 +25,14 @@ function CharacterForm({ handleSubmit }) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        // call the handleSubmit function to update the characters in the state of the parent component
-        handleSubmit(data);
+        // call the handleAddCharacter function to update the characters in the state of the parent component
+    handleAddCharacter(data);
         // clear the form and display success message
         setName("");
-        setImage("");
         setSuccessMessage("Character added successfully!");
+        setShowSuccessMessage(true);
         // remove success message after 3 seconds
-        setTimeout(() => {
-          setSuccessMessage("");
-        }, 3000);
+        setTimeout(() => setShowSuccessMessage(false), 3000);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -57,12 +56,14 @@ function CharacterForm({ handleSubmit }) {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            
+
             <button type="submit" className="ui primary button">
               Add Character
             </button>
-            {successMessage && (
-              <div className="ui success message">{successMessage}</div>
+            {showSuccessMessage && (
+              <Message success>
+                <Message.Header>{successMessage}</Message.Header>
+              </Message>
             )}
           </form>
         </div>

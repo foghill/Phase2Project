@@ -50,6 +50,10 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
+  function handleAddCharacter(newCharacter) {
+    setCharacters([...characters, newCharacter]);
+  }
+
   //function to add character to the list
   //the fetch method is used to make a request to the API
   //the method in the fetch is POST because we are adding a character to the database
@@ -103,10 +107,7 @@ function App() {
     );
   }
 
-  function handleSubmit(newCharacter) {
-    // Update the characters state with the new character
-    setCharacters([...characters, newCharacter]);
-  }
+
 
   return (
     <Router>
@@ -146,7 +147,8 @@ function App() {
           path="/locations"
           element={<LocationsContainer locations={locations} />}
         />
-        <Route path="/characterform" element={<CharacterForm />} />
+        <Route path="/characterform" element={<CharacterForm
+        handleAddCharacter={handleAddCharacter} />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
