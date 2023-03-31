@@ -1,26 +1,24 @@
 import React from "react";
-import { Card, Icon, Image } from "semantic-ui-react";
-import { Button, Label } from "semantic-ui-react";
+import { Card, Button, Icon, Label } from "semantic-ui-react";
 
 function CharacterCard({ characterData, handleDelete, handleClickLikes }) {
-  // destructure characterData to get the needed properties
   const { id, status, name, species, image, likes } = characterData;
 
   return (
-    <div className="ui link cards">
+    <Card style={{ maxWidth: "400px", marginBottom: "1em" }}>
       <div className="ui card card-container">
         <div className="image">
-          <img src={image} alt={name} />
+          <img src={image} alt={name} style={{ objectFit: "cover" }} />
         </div>
-        <div className="content">
-          <div className="header">{name}</div>
-
-          <div className="description">
-            <p>{status} - {species}</p>
-
-          </div>
-        </div>
-        <div className="extra content">
+        <Card.Content>
+          <Card.Header>{name}</Card.Header>
+          <Card.Description>
+            <p>
+              {status} - {species}
+            </p>
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
           <Button
             as="div"
             labelPosition="right"
@@ -43,9 +41,9 @@ function CharacterCard({ characterData, handleDelete, handleClickLikes }) {
               Delete
             </Button>
           </Button>
-        </div>
+        </Card.Content>
       </div>
-    </div>
+    </Card>
   );
 }
 

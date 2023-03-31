@@ -11,6 +11,7 @@ function CharacterForm({ handleSubmit }) {
     const newCharacter = {
       name,
       image: `https://api.lorem.space/image/face?w=150&h=150`,
+      likes: 0
     };
 
     fetch("http://localhost:3001/characters", {

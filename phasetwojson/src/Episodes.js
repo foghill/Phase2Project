@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Card, Grid, Loader } from "semantic-ui-react";
 
 function Episodes() {
   // state for episodes data
@@ -49,40 +50,42 @@ function Episodes() {
 
   // only render the episode cards once all character names have been fetched
   if (!allNamesFetched) {
-    return <div>Loading...</div>;
+    return <Loader active>Loading...</Loader>;
   }
 
   return (
-    <div className="ui center aligned grid locations-container">
+    <Grid centered>
       {episodes.map((episode) => (
-        <div key={episode.id} className="ui card">
-          <div className="content">
-            <div className="header">
-              {episode.name} ({episode.episode})
-            </div>
-            <div className="description">
-              <p>Air date: {episode.air_date}</p>
-              <p>
-                Characters:{" "}
-                {episode.characters.map((characterUrl) => {
-                  // Extract the character ID from the URL
-                  const characterId = characterUrl.split("/").pop();
-                  // Find the character name from the character ID
-                  const characterName = characterNames[characterId];
-                  return (
-                    <span key={characterId}>
-                      {/* Show the character name if it is available */}
-                      {characterName ? characterName : ""}
-                      <br />
-                    </span>
-                  );
-                })}
-              </p>
-            </div>
-          </div>
-        </div>
+        <Grid.Column key={episode.id} mobile={16} tablet={8} computer={4}>
+          <Card fluid style={{ maxWidth: "600px" }}>
+            <Card.Content>
+              <Card.Header>
+                {episode.name} ({episode.episode})
+              </Card.Header>
+              <Card.Description>
+                <p>Air date: {episode.air_date}</p>
+                <p>
+                  Characters:{" "}
+                  {episode.characters.map((characterUrl) => {
+                    // Extract the character ID from the URL
+                    const characterId = characterUrl.split("/").pop();
+                    // Find the character name from the character ID
+                    const characterName = characterNames[characterId];
+                    return (
+                      <span key={characterId}>
+                        {/* Show the character name if it is available */}
+                        {characterName ? characterName : ""}
+                        <br />
+                      </span>
+                    );
+                  })}
+                </p>
+              </Card.Description>
+            </Card.Content>
+          </Card>
+        </Grid.Column>
       ))}
-    </div>
+    </Grid>
   );
 }
 

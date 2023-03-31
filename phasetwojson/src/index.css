@@ -16,8 +16,155 @@
   margin-bottom: 1rem;
 }
 
-.ui.card {
-  max-width: 300px;
+.locations-container h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.locations-container p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.locations-container a {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.locations-container a:hover {
+  color: #ff0000;
+}
+
+.locations-container a:visited {
+  color: #ff0000;
+}
+
+.locations-container a:active {
+  color: #ff0000;
+}
+
+.locations-container a:link {
+  color: #ff0000;
+}
+
+.locations-container a:visited {
+  color: #ff0000;
+}
+
+.locations-container a:active {
+  color: #ff0000;
+}
+
+.locations-container a:link {
+  color: #ff0000;
+}
+
+.locations-container a:visited {
+  color: #ff0000;
+}
+
+.locations-container a:active {
+  color: #ff0000;
+}
+
+.locations-container a:link {
+  color: #ff0000;
+}
+
+.episodes-container {
+  margin-top: 60px;
+}
+
+.episodes-container h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.episodes-container h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.episodes-container p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.episodes-container a {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.episodes-container a:hover {
+  color: #ff0000;
+}
+
+.episodes-container a:visited {
+  color: #ff0000;
+}
+
+.episodes-container a:active {
+  color: #ff0000;
+}
+
+.episodes-container a:link {
+  color: #ff0000;
+}
+
+.episodes-container a:visited {
+  color: #ff0000;
+}
+
+.episodes-container a:active {
+  color: #ff0000;
+}
+
+.characters-container {
+  margin-top: 60px;
+}
+
+.characters-container h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.characters-container h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.characters-container p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.ui.grid.locations-container > div:first-child {
+  margin-top: 0;
+}
+
+.ui.grid.episodes-container > div:first-child {
+  margin-top: 0;
+}
+
+.ui.center.aligned.grid > div:first-child {
+  margin-top: 0;
+}
+
+.episodes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  margin: 1rem;
 }
 
 .form-container {

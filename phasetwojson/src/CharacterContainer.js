@@ -1,18 +1,21 @@
 import React from "react";
+import { Card, Grid } from "semantic-ui-react";
 import CharacterCard from "./CharacterCard";
 
 function Character({ characters, handleDelete, handleClickLikes }) {
   return (
-    <div class="ui center aligned grid">
-      {characters.map((characterData) => (
-        <CharacterCard
-          key={characterData.id}
-          characterData={characterData}
-          handleDelete={handleDelete}
-          handleClickLikes={handleClickLikes}
-        />
-      ))}
-    </div>
+    <Grid centered textAlign="center">
+      <Card.Group>
+        {characters.map((characterData) => (
+          <CharacterCard
+            key={characterData.id}
+            characterData={characterData}
+            handleDelete={handleDelete}
+            handleClickLikes={handleClickLikes}
+          />
+        ))}
+      </Card.Group>
+    </Grid>
   );
 }
 
