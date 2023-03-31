@@ -1,11 +1,14 @@
 import React from "react";
-import { Card, Grid } from "semantic-ui-react";
+import { Card, Grid, Segment } from "semantic-ui-react";
 import CharacterCard from "./CharacterCard";
 
 function Character({ characters, handleDelete, handleClickLikes }) {
   return (
-    <Grid centered textAlign="center">
-      <Card.Group>
+    <Grid columns={4} centered textAlign="center" style={{ marginTop: "2rem", paddingLeft: "1rem" }}>
+       <Segment>
+        <h1>Characters</h1>
+      </Segment>
+      <Grid.Row>
         {characters.map((characterData) => (
           <CharacterCard
             key={characterData.id}
@@ -14,7 +17,7 @@ function Character({ characters, handleDelete, handleClickLikes }) {
             handleClickLikes={handleClickLikes}
           />
         ))}
-      </Card.Group>
+      </Grid.Row>
     </Grid>
   );
 }

@@ -1,49 +1,43 @@
 import React from "react";
-import { Card, Button, Icon, Label } from "semantic-ui-react";
+import {
+  Card,
+  Image,
+  Button,
+  Icon,
+  Label,
+  Grid,
+} from "semantic-ui-react";
 
 function CharacterCard({ characterData, handleDelete, handleClickLikes }) {
   const { id, status, name, species, image, likes } = characterData;
 
   return (
-    <Card style={{ maxWidth: "400px", marginBottom: "1em" }}>
-      <div className="ui card card-container">
-        <div className="image">
-          <img src={image} alt={name} style={{ objectFit: "cover" }} />
-        </div>
+    <Grid.Column mobile={16} tablet={8} computer={4}>
+      <Card color="blue">
+        <Image src={image} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{name}</Card.Header>
-          <Card.Description>
-            <p>
+          <Card.Meta>
+            <span className="date">
               {status} - {species}
-            </p>
+            </span>
+          </Card.Meta>
+          <Card.Description>
+            <Label color="red" tag>
+              <Icon name="heart" /> {likes}
+            </Label>
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button
-            as="div"
-            labelPosition="right"
-            onClick={() => handleClickLikes(characterData)}
-          >
-            <Button color="red">
-              <Icon name="heart" />
-              Like
-            </Button>
-            <Label as="a" basic color="red" pointing="left">
-              {likes}
-            </Label>
+          <Button basic color="red" onClick={() => handleClickLikes(characterData)}>
+            <Icon name="heart" /> Like
           </Button>
-          <Button
-            as="div"
-            labelPosition="right"
-            onClick={() => handleDelete(id)}
-          >
-            <Button basic color="blue">
-              Delete
-            </Button>
+          <Button basic color="blue" onClick={() => handleDelete(id)}>
+            <Icon name="trash" /> Delete
           </Button>
         </Card.Content>
-      </div>
-    </Card>
+      </Card>
+    </Grid.Column>
   );
 }
 

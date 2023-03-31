@@ -79,7 +79,7 @@
       "status": "Alive",
       "species": "Alien",
       "type": "",
-      "likes": 9,
+      "likes": 10,
       "gender": "Female",
       "origin": {
         "name": "Abadango",
@@ -148,7 +148,7 @@
       "status": "Dead",
       "species": "Human",
       "type": "Superhuman (Ghost trains summoner)",
-      "likes": 10,
+      "likes": 11,
       "gender": "Male",
       "origin": {
         "name": "unknown",
@@ -217,7 +217,7 @@
       "status": "unknown",
       "species": "Alien",
       "type": "",
-      "likes": 3,
+      "likes": 5,
       "gender": "unknown",
       "origin": {
         "name": "unknown",
