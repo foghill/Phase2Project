@@ -3,24 +3,25 @@ import { Card, Icon, Image } from "semantic-ui-react";
 import { Button, Label } from "semantic-ui-react";
 
 function CharacterCard({ characterData, handleDelete, handleClickLikes }) {
+  // destructure characterData to get the needed properties
   const { id, status, name, species, image, likes } = characterData;
+
   return (
     <div className="ui link cards">
-      <div class="ui card">
-        <div class="image">
+      <div className="ui card card-container">
+        <div className="image">
           <img src={image} alt={name} />
         </div>
-        <div class="content">
-          <div class="header">{name}</div>
+        <div className="content">
+          <div className="header">{name}</div>
 
-          <div class="description">
+          <div className="description">
             <p>{status} - {species}</p>
 
           </div>
         </div>
-        <div class="extra content">
+        <div className="extra content">
           <Button
-          class='extra content'
             as="div"
             labelPosition="right"
             onClick={() => handleClickLikes(characterData)}

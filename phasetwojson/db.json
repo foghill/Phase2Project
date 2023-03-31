@@ -79,7 +79,7 @@
       "status": "Alive",
       "species": "Alien",
       "type": "",
-      "likes": 8,
+      "likes": 9,
       "gender": "Female",
       "origin": {
         "name": "Abadango",
@@ -263,7 +263,7 @@
       "status": "unknown",
       "species": "Alien",
       "type": "",
-      "likes": 0,
+      "likes": 2,
       "gender": "Male",
       "origin": {
         "name": "unknown",

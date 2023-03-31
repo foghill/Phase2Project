@@ -23,16 +23,22 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [locations, setLocations] = useState([]);
 
-  useEffect(() => {
-    //use IIFE or Axios
+
+
+ useEffect(() => {
     (async function () {
+      // Get the data from the API
       let data = await fetch(API).then((res) => res.json()); //returns a promise amd converts to json
+
+      // Set the data to the state
       setCharacters(data);
+
+      // Log the data
       console.log("characters", data);
-      //user setter to setjson data to state
     })();
   }, []);
-  //whenever API changes, change data in state
+
+  // Fetches locations data from API, sets location data to state
 
   useEffect(() => {
     // Fetch locations data from API
@@ -47,36 +53,48 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
-  //fetch doent take an object,so we need to convert it to a string
-  function addCharacter(char) {
-    fetch(API, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(char),
-    })
-      .then((res) => res.json())
-      .then((data) => setCharacters([...characters, data]));
-  }
+   //function to add character to the list
+//the fetch method is used to make a request to the API
+//the method in the fetch is POST because we are adding a character to the database
+//the headers are used to specify the content type of the data being sent
+//the body is the data to be sent to the database
+//the characters state is updated to include the new character
+
+ //fetch doent take an object,so we need to convert it to a string
+    function addCharacter(char) {
+      fetch(API, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(char),
+      })
+        .then((res) => res.json())
+        .then((data) => setCharacters([...characters, data]));
+    }
+  
 
 
-  function deleteCharacter(id) {
+   //This function fetches the data from the API and deletes the character that has been selected with the delete button
+  //The function is called when the delete button is clicked and the deleteCharacter function is passed the character ID
+  //The fetch function is used to delete the character and the data is then filtered to remove the character that has been deleted
+
+ function deleteCharacter(id) {
     console.log("deleting", id);
-    fetch(`${API}/${id}`, {
-      method: "DELETE",
-      headers,
+    fetch(`${API}/${id}`, { //fetch the API and the id of the character to be deleted
+      method: "DELETE", //delete the character
+      headers, //send the headers
     }).then(
       (data) => setCharacters(characters.filter((char) => char.id !== id)) //filter out existing characters array and we're only including the ones that don't match the id that we just deleted
     );
   }
 
   function incrementLikes(char) {
-    fetch(`${API}/${char.id}`, {
+    fetch(`${API}/${char.id}`, { // we're using the id of the character we're looking at to do the fetch
       method: "PATCH",
       headers,
       body: JSON.stringify({ likes: char.likes + 1 }),
     }).then(() =>
-      setCharacters(
-        characters.map(
+      setCharacters( //we're going to set the characters state to a new array
+        characters.map( //we're going to map over the characters array
           (oldChar) =>
             oldChar.id !== char.id //we're going to replace all the characters if it's not the one we're looking at
               ? oldChar //we're going to not change it
@@ -84,6 +102,11 @@ function App() {
         )
       )
     );
+  }
+
+  function handleSubmit(newCharacter) {
+    // Update the characters state with the new character
+    setCharacters([...characters, newCharacter]);
   }
 
   return (

@@ -5,17 +5,23 @@ function CharacterForm({ handleSubmit }) {
   const [image, setImage] = useState("");
   const [id, setId] = useState("");
 
+
+  
+
   function onSubmit(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const newCharacter = {
-      name,
-      image,
-      id: (Math.random() * 20).toString(),
-    };
+  const newCharacter = {
+    name,
+    image,
+    id,
+  };
 
-    handleSubmit(newCharacter);
-  }
+  handleSubmit(newCharacter);
+  setName("");
+  setImage("");
+  setId("");
+}
 
   return (
     <div className="ui center aligned grid">
@@ -28,7 +34,6 @@ function CharacterForm({ handleSubmit }) {
           className="input-text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          //inline fuction to set the name state
         />
         <br />
         <input
@@ -38,7 +43,15 @@ function CharacterForm({ handleSubmit }) {
           className="input-text"
           value={image}
           onChange={(e) => setImage(e.target.value)}
-          //inline fuction to set the image state
+        />
+        <br />
+        <input
+          type="text"
+          name="id"
+          placeholder="Enter a character's id..."
+          className="input-text"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
         />
         <br />
         <input
