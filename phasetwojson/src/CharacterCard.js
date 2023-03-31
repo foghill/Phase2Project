@@ -14,8 +14,8 @@ function CharacterCard({ characterData, handleDelete, handleClickLikes }) {
           <div class="header">{name}</div>
 
           <div class="description">
-            <p>{status} </p>
-            <p>{species}</p>
+            <p>{status} - {species}</p>
+
           </div>
         </div>
         <div class="extra content">

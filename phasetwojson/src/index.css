@@ -7,3 +7,12 @@
   height: 20rem;
   padding: 1rem;
 }
+
+
+.locations-container {
+  margin-top: 60px;
+}
+
+.ui.card {
+  height: 200px;
+}

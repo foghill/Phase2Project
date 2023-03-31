@@ -6,7 +6,7 @@
       "status": "Alive",
       "species": "Human",
       "type": "",
-      "likes": 20,
+      "likes": 23,
       "gender": "Male",
       "origin": {
         "name": "Earth (C-137)",
@@ -102,7 +102,7 @@
       "status": "Dead",
       "species": "Human",
       "type": "",
-      "likes": 0,
+      "likes": 4,
       "gender": "Male",
       "origin": {
         "name": "unknown",
@@ -125,7 +125,7 @@
       "status": "Dead",
       "species": "Human",
       "type": "",
-      "likes": 1,
+      "likes": 4,
       "gender": "Male",
       "origin": {
         "name": "Earth (Replacement Dimension)",
@@ -148,7 +148,7 @@
       "status": "Dead",
       "species": "Human",
       "type": "Superhuman (Ghost trains summoner)",
-      "likes": 7,
+      "likes": 10,
       "gender": "Male",
       "origin": {
         "name": "unknown",
@@ -332,7 +332,7 @@
       "status": "Alive",
       "species": "Human",
       "type": "Human with antennae",
-      "likes": 0,
+      "likes": 2,
       "gender": "Male",
       "origin": {
         "name": "unknown",
@@ -356,7 +356,7 @@
       "status": "unknown",
       "species": "Human",
       "type": "Human with antennae",
-      "likes": 3,
+      "likes": 5,
       "gender": "Male",
       "origin": {
         "name": "unknown",
@@ -379,7 +379,7 @@
       "status": "unknown",
       "species": "Human",
       "type": "Human with ants in his eyes",
-      "likes": 0,
+      "likes": 3,
       "gender": "Male",
       "origin": {
         "name": "unknown",

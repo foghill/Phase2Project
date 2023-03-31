@@ -5,7 +5,7 @@ import Header from "./Header";
 import CharacterForm from "./CharacterForm";
 import CharacterContainer from "./CharacterContainer";
 import Episodes from "./Episodes";
-import Locations from "./Locations";
+import LocationsContainer from "./LocationsContainer";
 import ErrorPage from "./ErrorPage";
 import { Icon, Label } from 'semantic-ui-react'
 
@@ -21,6 +21,7 @@ const headers = {
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [characters, setCharacters] = useState([]);
+  const [locations, setLocations] = useState([]);
 
   useEffect(() => {
     //use IIFE or Axios
@@ -32,6 +33,15 @@ function App() {
     })();
   }, []);
   //whenever API changes, change data in state
+
+  useEffect(() => {
+    // Fetch locations data from API
+    fetch("http://localhost:3001/locations")
+      .then((res) => res.json())
+      .then((data) => setLocations(data))
+      .catch((error) => console.log(error));
+  }, []);
+
 
   function handleClick() {
     setShowForm((showForm) => !showForm);
@@ -45,8 +55,9 @@ function App() {
       body: JSON.stringify(char),
     })
       .then((res) => res.json())
-      .then((data) => setCharacters([...characters, char]));
+      .then((data) => setCharacters([...characters, data]));
   }
+
 
   function deleteCharacter(id) {
     console.log("deleting", id);
@@ -110,7 +121,7 @@ function App() {
         />
         
         <Route path="/episodes" element={<Episodes />} />
-        <Route path="/locations" element={<Locations />} />
+        <Route path="/locations" element={<LocationsContainer locations={locations} />} />
         <Route path="/characterform" element={<CharacterForm />} />
         <Route path="*" element={<ErrorPage />} />
         
