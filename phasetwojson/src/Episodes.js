@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Card, Grid, Loader, Segment } from "semantic-ui-react";
 
+// This is a functional component in a React project that displays episodes of a show along with the characters that appeared in each episode. It makes use of the Semantic UI React library for styling.
+
+// The component has three states: episodes, characterNames, and allNamesFetched. The episodes state stores an array of episode objects fetched from an API. The characterNames state stores an object that maps character IDs to character names. The allNamesFetched state is a boolean that tracks whether all character names have been fetched.
+
+// The component uses two useEffect hooks to fetch episodes data and character names. The first useEffect hook is responsible for fetching episodes data from the API. The second useEffect hook fetches character data for each character URL in each episode and updates the character names state with the corresponding character name.
+
+// The component returns a loading message while the character names are being fetched. Once all character names have been fetched, the component renders a grid of episode cards. Each card contains the episode name, episode number, air date, and a list of characters that appeared in the episode. The list of characters is constructed by looping over each character URL in the episode, extracting the character ID from the URL, and finding the character name from the characterNames state. If the character name is available, it is displayed. Otherwise, an empty string is displayed.
+
+// Overall, this component demonstrates how to use React hooks to fetch data from an API and update the state of a component based on that data. It also shows how to use conditional rendering to display a loading message until all necessary data has been fetched. The use of the Semantic UI React library provides a clean and professional-looking UI for the component.
+
+
+
+
+
 function Episodes() {
   // state for episodes data
   const [episodes, setEpisodes] = useState([]);

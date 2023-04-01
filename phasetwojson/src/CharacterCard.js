@@ -10,6 +10,7 @@ import {
 
 function CharacterCard({ characterData, handleDelete, handleClickLikes }) {
   const { id, status, name, species, image, likes } = characterData;
+  //This is a destructuring assignment to extract the properties from the characterData object.
 
   return (
     <Grid.Column mobile={16} tablet={8} computer={4} style={{ padding: "1rem" }}>
