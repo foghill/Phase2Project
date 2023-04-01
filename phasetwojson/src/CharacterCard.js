@@ -12,7 +12,7 @@ function CharacterCard({ characterData, handleDelete, handleClickLikes }) {
   const { id, status, name, species, image, likes } = characterData;
 
   return (
-    <Grid.Column mobile={16} tablet={8} computer={4}>
+    <Grid.Column mobile={16} tablet={8} computer={4} style={{ padding: "1rem" }}>
       <Card color="blue">
         <Image src={image} wrapped ui={false} />
         <Card.Content>

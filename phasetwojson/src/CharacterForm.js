@@ -9,11 +9,22 @@ function CharacterForm({ handleAddCharacter}) {
   function onSubmit(e) {
     e.preventDefault();
 
-    const newCharacter = {
-      name,
-      image: `https://api.lorem.space/image/face?w=150&h=150`,
-      likes: 0,
-    };
+    // Define arrays of possible status and species categories
+  const statuses = ["Alive", "Dead", "Unknown"];
+  const species = ["Human", "Alien", "Robot"];
+
+  // Generate a random index for each array
+  const randomStatusIndex = Math.floor(Math.random() * statuses.length);
+  const randomSpeciesIndex = Math.floor(Math.random() * species.length);
+
+
+  const newCharacter = {
+    name,
+    image: `https://api.lorem.space/image/face?w=150&h=150`,
+    likes: 0,
+    status: statuses[randomStatusIndex], // set status to a random value from the statuses array
+    species: species[randomSpeciesIndex], // set species to a random value from the species array
+  };
 
     fetch("http://localhost:3001/characters", {
       method: "POST",
@@ -44,7 +55,7 @@ function CharacterForm({ handleAddCharacter}) {
       <div className="ui centered card">
         <div className="content">
           <form className="ui form" onSubmit={onSubmit}>
-            <h3>Add a Character!</h3>
+            <h3>Add a Character !</h3>
             <div className="field">
               <label>Name</label>
               <input
