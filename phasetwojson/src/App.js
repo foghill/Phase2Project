@@ -6,6 +6,7 @@ import CharacterContainer from "./CharacterContainer";
 import Episodes from "./Episodes";
 import LocationsContainer from "./LocationsContainer";
 import ErrorPage from "./ErrorPage";
+import { v4 as uuidv4 } from 'uuid';
 
 const API = "http://localhost:3001/characters";
 
@@ -19,6 +20,7 @@ const headers = {
 function App() {
   const [characters, setCharacters] = useState([]);
   const [locations, setLocations] = useState([]);
+
 
   useEffect(() => {
     // Fetch locations data from API
@@ -42,15 +44,41 @@ function App() {
   //   setShowForm((showForm) => !showForm);
   // }
 
-  function handleAddCharacter(newCharacter) {
-    fetch(API, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(newCharacter),
+  // function handleAddCharacter(newCharacter) {
+  //   fetch(API, {
+  //     method: "POST",
+  //     headers,
+  //     body: JSON.stringify(newCharacter),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => setCharacters([...characters, newCharacter]));
+  // }
+
+
+function handleAddCharacter(newCharacter) {
+  // Generate a unique ID for the new character
+  const id = uuidv4();
+
+  // Add the ID to the new character object
+  const characterWithId = { ...newCharacter, id };
+
+  fetch(API, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(characterWithId),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      // update characters page with new character
+      setCharacters((prevCharacters) => [...prevCharacters, data]);
     })
-      .then((res) => res.json())
-      .then((data) => setCharacters([...characters, newCharacter]));
-  }
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+  
 
   //This function fetches the data from the API and deletes the character that has been selected with the delete button
   //The function is called when the delete button is clicked and the deleteCharacter function is passed the character ID
@@ -125,7 +153,7 @@ function App() {
         />
         <Route
           path="/characterform"
-          element={<CharacterForm handleAddCharacter={handleAddCharacter} />}
+          element={<CharacterForm handleAddCharacter={handleAddCharacter} setCharacters={setCharacters}/>}
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
