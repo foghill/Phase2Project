@@ -3,20 +3,18 @@ import { Message } from "semantic-ui-react";
 
 function CharacterForm({ handleAddCharacter }) {
   const [name, setName] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-
+ 
   function onSubmit(e) {
     e.preventDefault();
-
+  
     // Define arrays of possible status and species categories
     const statuses = ["Alive", "Dead", "Unknown"];
     const species = ["Human", "Alien", "Robot"];
-
+  
     // Generate a random index for each array
     const randomStatusIndex = Math.floor(Math.random() * statuses.length);
     const randomSpeciesIndex = Math.floor(Math.random() * species.length);
-
+  
     const newCharacter = {
       name,
       image: `https://api.lorem.space/image/face?w=150&h=150`,
@@ -24,17 +22,13 @@ function CharacterForm({ handleAddCharacter }) {
       status: statuses[randomStatusIndex], // set status to a random value from the statuses array
       species: species[randomSpeciesIndex], // set species to a random value from the species array
     };
-
+  
     handleAddCharacter(newCharacter);
-
-    // clear the form and display success message
+  
+    // clear the form
     setName("");
-    setSuccessMessage("Character added successfully!");
-    setShowSuccessMessage(true);
-
-    // remove success message after 3 seconds
-    setTimeout(() => setShowSuccessMessage(false), 3000);
   }
+  
 
   
 
@@ -59,11 +53,6 @@ function CharacterForm({ handleAddCharacter }) {
             <button type="submit" className="ui primary button">
               Add Character
             </button>
-            {showSuccessMessage && (
-              <Message success>
-                <Message.Header>{successMessage}</Message.Header>
-              </Message>
-            )}
           </form>
         </div>
       </div>
