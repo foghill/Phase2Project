@@ -40,20 +40,9 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
-  // function handleClick() {
-  //   setShowForm((showForm) => !showForm);
-  // }
 
-  // function handleAddCharacter(newCharacter) {
-  //   fetch(API, {
-  //     method: "POST",
-  //     headers,
-  //     body: JSON.stringify(newCharacter),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => setCharacters([...characters, newCharacter]));
-  // }
 
+  //This function fetches the data from the API and adds the new character to the page
 
 function handleAddCharacter(newCharacter) {
   // Generate a unique ID for the new character

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Message } from "semantic-ui-react";
 
 function CharacterForm({ handleAddCharacter }) {
   const [name, setName] = useState("");
