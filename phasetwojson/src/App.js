@@ -9,9 +9,7 @@ import ErrorPage from "./ErrorPage";
 import { v4 as uuidv4 } from "uuid";
 import { Grid, Button } from "semantic-ui-react";
 
-
 const API = "http://localhost:3001/characters";
-
 
 //potentially do all the destructuring here or in the CharacterCard component
 
@@ -25,6 +23,28 @@ function App() {
   const [locations, setLocations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
+  const [locationsPage, setLocationsPage] = useState(1);
+
+  useEffect(() => {
+    fetchLocations(locationsPage);
+  }, [locationsPage]);
+
+  const handleNextLocationsPage = () => {
+    setLocationsPage(locationsPage + 1);
+  };
+
+  const handlePrevLocationsPage = () => {
+    if (locationsPage > 1) {
+      setLocationsPage(locationsPage - 1);
+    }
+  };
+
+  const fetchLocations = (page) => {
+    fetch(`http://localhost:3001/locations?_limit=10&_page=${page}`)
+      .then((res) => res.json())
+      .then((data) => setLocations(data))
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     // Fetch locations data from API
@@ -33,8 +53,6 @@ function App() {
       .then((data) => setCharacters(data))
       .catch((error) => console.log(error));
   }, []);
-
-  
 
   // Fetches locations data from API, sets location data to state
 
@@ -50,21 +68,12 @@ function App() {
     fetchCharacters(page);
   }, [page]);
 
-  useEffect(() => {
-    fetch("http://localhost:3001/locations")
-      .then((res) => res.json())
-      .then((data) => setLocations(data))
-      .catch((error) => console.log(error));
-  }, []);
-
   const fetchCharacters = (page) => {
     fetch(`${API}?_limit=15&_page=${page}`)
       .then((res) => res.json())
       .then((data) => setCharacters(data))
       .catch((error) => console.log(error));
   };
-  
-  
 
   const handleNextPage = () => {
     setPage(page + 1);
@@ -163,16 +172,28 @@ function App() {
               characters={characters}
               handleDelete={deleteCharacter}
               handleClickLikes={incrementLikes}
-              searchTerm={searchTerm} // pass searchTerm as prop
-              setSearchTerm={setSearchTerm} // pass setSearchTerm as prop
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              onNextPage={handleNextPage}
+              onPrevPage={handlePrevPage}
+              currentPage={page}
             />
           }
         />
+
         <Route path="/episodes" element={<Episodes />} />
         <Route
           path="/locations"
-          element={<LocationsContainer locations={locations} />}
+          element={
+            <LocationsContainer
+              locations={locations}
+              onNextPage={handleNextLocationsPage}
+              onPrevPage={handlePrevLocationsPage}
+              currentPage={locationsPage}
+            />
+          }
         />
+
         <Route
           path="/characterform"
           element={
@@ -184,23 +205,6 @@ function App() {
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-      <Grid centered>
-  <Grid.Row>
-    <Grid.Column width={16} textAlign="center">
-      <Button.Group>
-        <Button
-          onClick={handlePrevPage}
-          disabled={page === 1}
-        >
-          Previous
-        </Button>
-        <Button.Or text={`${page}`} />
-        <Button onClick={handleNextPage}>Next</Button>
-      </Button.Group>
-    </Grid.Column>
-  </Grid.Row>
-</Grid>
-
     </Router>
   );
 }
