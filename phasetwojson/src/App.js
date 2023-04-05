@@ -7,8 +7,11 @@ import Episodes from "./Episodes";
 import LocationsContainer from "./LocationsContainer";
 import ErrorPage from "./ErrorPage";
 import { v4 as uuidv4 } from "uuid";
+import { Grid, Button } from "semantic-ui-react";
+
 
 const API = "http://localhost:3001/characters";
+
 
 //potentially do all the destructuring here or in the CharacterCard component
 
@@ -21,6 +24,7 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [locations, setLocations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     // Fetch locations data from API
@@ -30,15 +34,47 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
+  
+
   // Fetches locations data from API, sets location data to state
 
+  // useEffect(() => {
+  //   // Fetch locations data from API
+  //   fetch("http://localhost:3001/locations")
+  //     .then((res) => res.json())
+  //     .then((data) => setLocations(data))
+  //     .catch((error) => console.log(error));
+  // }, []);
+
   useEffect(() => {
-    // Fetch locations data from API
+    fetchCharacters(page);
+  }, [page]);
+
+  useEffect(() => {
     fetch("http://localhost:3001/locations")
       .then((res) => res.json())
       .then((data) => setLocations(data))
       .catch((error) => console.log(error));
   }, []);
+
+  const fetchCharacters = (page) => {
+    fetch(`${API}?_limit=15&_page=${page}`)
+      .then((res) => res.json())
+      .then((data) => setCharacters(data))
+      .catch((error) => console.log(error));
+  };
+  
+  
+
+  const handleNextPage = () => {
+    setPage(page + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
 
   //This function fetches the data from the API and adds the new character to the page
 
@@ -120,7 +156,7 @@ function App() {
       </nav>
       <div className="buttonContainer"></div>
       <Routes>
-      <Route
+        <Route
           path="/"
           element={
             <CharacterContainer
@@ -148,6 +184,23 @@ function App() {
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
+      <Grid centered>
+  <Grid.Row>
+    <Grid.Column width={16} textAlign="center">
+      <Button.Group>
+        <Button
+          onClick={handlePrevPage}
+          disabled={page === 1}
+        >
+          Previous
+        </Button>
+        <Button.Or text={`${page}`} />
+        <Button onClick={handleNextPage}>Next</Button>
+      </Button.Group>
+    </Grid.Column>
+  </Grid.Row>
+</Grid>
+
     </Router>
   );
 }
