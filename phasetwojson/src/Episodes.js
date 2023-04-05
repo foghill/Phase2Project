@@ -11,10 +11,6 @@ import { Card, Grid, Loader, Segment } from "semantic-ui-react";
 
 // Overall, this component demonstrates how to use React hooks to fetch data from an API and update the state of a component based on that data. It also shows how to use conditional rendering to display a loading message until all necessary data has been fetched. The use of the Semantic UI React library provides a clean and professional-looking UI for the component.
 
-
-
-
-
 function Episodes() {
   // state for episodes data
   const [episodes, setEpisodes] = useState([]);
@@ -72,41 +68,43 @@ function Episodes() {
       <Segment>
         <h1>Episodes</h1>
       </Segment>
-      <Grid centered>
-        {episodes.map((episode) => (
-          <Grid.Column key={episode.id} mobile={16} tablet={8} computer={4}>
-            <Card fluid style={{ maxWidth: "600px" }}>
- 
-              <Card.Content>
-                <Card.Header>
-                  {episode.name} ({episode.episode})
-                </Card.Header>
-                <Card.Description>
-                  <p>Air date: {episode.air_date}</p>
-                  <p>
-                    Characters:{" "}
-                    {episode.characters.map((characterUrl) => {
-                      // Extract the character ID from the URL
-                      const characterId = characterUrl.split("/").pop();
-                      // Find the character name from the character ID
-                      const characterName = characterNames[characterId];
-                      return (
-                        <span key={characterId}>
-                          {/* Show the character name if it is available */}
-                          {characterName ? characterName : ""}
-                          <br />
-                        </span>
-                      );
-                    })}
-                  </p>
-                </Card.Description>
-              </Card.Content>
-            </Card>
-          </Grid.Column>
-        ))}
+      <Grid centered columns={3} stackable>
+        <Grid.Row>
+          {episodes.map((episode) => (
+            <Grid.Column key={episode.id}>
+              <Card fluid style={{ maxWidth: "600px" }}>
+                <Card.Content>
+                  <Card.Header>
+                    {episode.name} ({episode.episode})
+                  </Card.Header>
+                  <Card.Description>
+                    <p>Air date: {episode.air_date}</p>
+                    <p>
+                      Characters:{" "}
+                      {episode.characters.map((characterUrl) => {
+                        // Extract the character ID from the URL
+                        const characterId = characterUrl.split("/").pop();
+                        // Find the character name from the character ID
+                        const characterName = characterNames[characterId];
+                        return (
+                          <span key={characterId}>
+                            {/* Show the character name if it is available */}
+                            {characterName ? characterName : ""}
+                            <br />
+                          </span>
+                        );
+                      })}
+                    </p>
+                  </Card.Description>
+                </Card.Content>
+              </Card>
+            </Grid.Column>
+          ))}
+        </Grid.Row>
       </Grid>
     </div>
   );
+  
 }
 
 export default Episodes;
