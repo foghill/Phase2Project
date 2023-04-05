@@ -6,7 +6,7 @@ import CharacterContainer from "./CharacterContainer";
 import Episodes from "./Episodes";
 import LocationsContainer from "./LocationsContainer";
 import ErrorPage from "./ErrorPage";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const API = "http://localhost:3001/characters";
 
@@ -20,7 +20,6 @@ const headers = {
 function App() {
   const [characters, setCharacters] = useState([]);
   const [locations, setLocations] = useState([]);
-
 
   useEffect(() => {
     // Fetch locations data from API
@@ -40,34 +39,31 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
-
-
   //This function fetches the data from the API and adds the new character to the page
 
-function handleAddCharacter(newCharacter) {
-  // Generate a unique ID for the new character
-  const id = uuidv4();
+  function handleAddCharacter(newCharacter) {
+    // Generate a unique ID for the new character
+    const id = uuidv4();
 
-  // Add the ID to the new character object
-  const characterWithId = { ...newCharacter, id };
+    // Add the ID to the new character object
+    const characterWithId = { ...newCharacter, id };
 
-  fetch(API, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(characterWithId),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-      // update characters page with new character
-      setCharacters((prevCharacters) => [...prevCharacters, data]);
+    //Send the new character object to the API using fetch.
+    fetch(API, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(characterWithId),
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-}
-
-  
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        // update characters page with new character
+        setCharacters((prevCharacters) => [...prevCharacters, data]);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
   //This function fetches the data from the API and deletes the character that has been selected with the delete button
   //The function is called when the delete button is clicked and the deleteCharacter function is passed the character ID
@@ -121,8 +117,7 @@ function handleAddCharacter(newCharacter) {
           Add a Character Form
         </Link>
       </nav>
-      <div className="buttonContainer">
-      </div>
+      <div className="buttonContainer"></div>
       <Routes>
         <Route
           path="/"
@@ -142,7 +137,12 @@ function handleAddCharacter(newCharacter) {
         />
         <Route
           path="/characterform"
-          element={<CharacterForm handleAddCharacter={handleAddCharacter} setCharacters={setCharacters}/>}
+          element={
+            <CharacterForm
+              handleAddCharacter={handleAddCharacter}
+              setCharacters={setCharacters}
+            />
+          }
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
