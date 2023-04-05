@@ -20,6 +20,7 @@ const headers = {
 function App() {
   const [characters, setCharacters] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     // Fetch locations data from API
@@ -119,17 +120,18 @@ function App() {
       </nav>
       <div className="buttonContainer"></div>
       <Routes>
-        <Route
+      <Route
           path="/"
           element={
             <CharacterContainer
               characters={characters}
               handleDelete={deleteCharacter}
               handleClickLikes={incrementLikes}
+              searchTerm={searchTerm} // pass searchTerm as prop
+              setSearchTerm={setSearchTerm} // pass setSearchTerm as prop
             />
           }
         />
-
         <Route path="/episodes" element={<Episodes />} />
         <Route
           path="/locations"
