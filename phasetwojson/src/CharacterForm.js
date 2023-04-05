@@ -6,14 +6,14 @@ function CharacterForm({ handleAddCharacter }) {
   const [species, setSpecies] = useState("Human");
 
   // Adding state hooks for status and species to store the selected values.
-// Changing the onSubmit function to use the selected status and species values.
-// Adding select elements for the status and species fields, with their values controlled by their respective state hooks.
-// Updating the setName hook to clear the input field.
-// Adding setStatus and setSpecies hooks to clear the select fields.
+  // Changing the onSubmit function to use the selected status and species values.
+  // Adding select elements for the status and species fields, with their values controlled by their respective state hooks.
+  // Updating the setName hook to clear the input field.
+  // Adding setStatus and setSpecies hooks to clear the select fields.
 
   function onSubmit(e) {
     e.preventDefault();
-  
+
     const newCharacter = {
       name,
       image: `https://api.lorem.space/image/face?w=150&h=150`,
@@ -21,9 +21,9 @@ function CharacterForm({ handleAddCharacter }) {
       status,
       species,
     };
-  
+
     handleAddCharacter(newCharacter);
-  
+
     setName("");
     setStatus("Alive");
     setSpecies("Human");
@@ -83,6 +83,3 @@ function CharacterForm({ handleAddCharacter }) {
 }
 
 export default CharacterForm;
-
-
-

@@ -6,6 +6,11 @@
   padding: 1rem;
 }
 
+.container {
+  text-align: center;
+}
+
+
 .locations-container {
   margin-top: 60px;
 }

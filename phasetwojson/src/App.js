@@ -7,7 +7,7 @@ import Episodes from "./Episodes";
 import LocationsContainer from "./LocationsContainer";
 import ErrorPage from "./ErrorPage";
 import { v4 as uuidv4 } from "uuid";
-import { Grid, Button } from "semantic-ui-react";
+import { Container, Menu } from "semantic-ui-react";
 
 const API = "http://localhost:3001/characters";
 
@@ -149,20 +149,23 @@ function App() {
   return (
     <Router>
       <Header />
-      <nav class="ui menu">
-        <Link to="/" class="item">
-          Characters
-        </Link>
-        <Link to="/episodes" class="item">
-          Episodes
-        </Link>
-        <Link to="/locations" class="item">
-          Locations
-        </Link>
-        <Link to="/characterform" class="item">
-          Add a Character Form
-        </Link>
-      </nav>
+      <Menu pointing secondary>
+        <Container style={{ display: "flex", justifyContent: "center" }}>
+          <Menu.Item as={Link} to="/" header>
+            Characters
+          </Menu.Item>
+          <Menu.Item as={Link} to="/episodes">
+            Episodes
+          </Menu.Item>
+          <Menu.Item as={Link} to="/locations">
+            Locations
+          </Menu.Item>
+          <Menu.Item as={Link} to="/characterform">
+            Add a Character Form
+          </Menu.Item>
+        </Container>
+      </Menu>
+
       <div className="buttonContainer"></div>
       <Routes>
         <Route
