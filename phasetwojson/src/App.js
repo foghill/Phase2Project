@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, } from "react-router-dom";
 import Header from "./Header";
 import CharacterForm from "./CharacterForm";
 import CharacterContainer from "./CharacterContainer";
@@ -125,26 +125,24 @@ function App() {
       (data) => setCharacters(characters.filter((char) => char.id !== id)) //filter out existing characters array and we're only including the ones that don't match the id that we just deleted
     );
   }
-
+//This version of the function checks if the likes property exists on the char object, and if it doesn't, it sets it to 0 before incrementing it. This should prevent NaN values from being returned.
   function incrementLikes(char) {
     fetch(`${API}/${char.id}`, {
-      // we're using the id of the character we're looking at to do the fetch
       method: "PATCH",
       headers,
-      body: JSON.stringify({ likes: char.likes + 1 }),
+      body: JSON.stringify({ likes: (char.likes || 0) + 1 }),
     }).then(() =>
       setCharacters(
-        //we're going to set the characters state to a new array
-        characters.map(
-          //we're going to map over the characters array
-          (oldChar) =>
-            oldChar.id !== char.id //we're going to replace all the characters if it's not the one we're looking at
-              ? oldChar //we're going to not change it
-              : { ...oldChar, likes: oldChar.likes + 1 } // otherwise we're going to create a new Character object, spread the values of the other one into it and increment the likes by one
+        characters.map((oldChar) =>
+          oldChar.id !== char.id
+            ? oldChar
+            : { ...oldChar, likes: (oldChar.likes || 0) + 1 }
         )
       )
     );
   }
+  
+  
 
   return (
     <Router>

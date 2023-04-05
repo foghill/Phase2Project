@@ -38,11 +38,21 @@ function CharacterContainer({
         <Grid.Row>
           <Grid.Column width={16} textAlign="center">
             <Button.Group>
-              <Button onClick={onPrevPage} disabled={currentPage === 1}>
+              <Button
+                onClick={onPrevPage}
+                disabled={currentPage === 1}
+                as={currentPage === 1 ? "div" : "button"}
+              >
                 Previous
               </Button>
               <Button.Or text={`${currentPage}`} />
-              <Button onClick={onNextPage}>Next</Button>
+              <Button
+                onClick={onNextPage}
+                disabled={filteredCharacters.length === 0}
+                as={filteredCharacters.length === 0 ? "div" : "button"}
+              >
+                Next
+              </Button>
             </Button.Group>
           </Grid.Column>
         </Grid.Row>

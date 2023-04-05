@@ -43,7 +43,9 @@ function CharacterForm({ handleAddCharacter }) {
                 placeholder="Enter a character's name..."
                 className="input-text"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setName(e.target.value)}}
               />
             </div>
             <div className="field">
