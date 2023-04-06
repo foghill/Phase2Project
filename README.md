@@ -6,8 +6,6 @@ This web app serves as a comprehensive and user-friendly interface for exploring
 
 All data is fetched from the [Rick and Morty API](https://rickandmortyapi.com/), which provides extensive information about the show's characters, locations, and episodes.
 
-A working demo of this app has been hosted on Netlify and can be [accessed here](https://rickandmortyflatiron.netlify.app/)
-
 The API is called within the App.js file using the useEffect hook and an [Immediately Invoked Function Expression](https://www.javascripttutorial.net/javascript-immediately-invoked-function-expression-iife/)
 
 The API returns three important resources in the object: Characters, Locations, Episodes.
