@@ -26,8 +26,6 @@ Paginate is an awesome package which helps create a page navigation bar
 
 ## App Structure and Components
 
-![](rickandmorty.gif)
-
 The web app is split up across a few different components including but not limited to:
 
 ### Homepage
@@ -37,6 +35,10 @@ The Homepage serves as the main entry point for the app and primarily focuses on
 A Navbar provides access to additional components, such as Episode and Location pages.
 
 A Searchbar component allows users to search for specific characters throughout the entire dataset..
+
+### App.js Component
+
+The App.js component serves as the main application component, managing state and providing routing for the various other components within the app.
 
 ### CharacterContainer Component
 
