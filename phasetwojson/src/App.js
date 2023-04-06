@@ -54,15 +54,6 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
-  // Fetches locations data from API, sets location data to state
-
-  // useEffect(() => {
-  //   // Fetch locations data from API
-  //   fetch("http://localhost:3001/locations")
-  //     .then((res) => res.json())
-  //     .then((data) => setLocations(data))
-  //     .catch((error) => console.log(error));
-  // }, []);
 
   useEffect(() => {
     fetchCharacters(page);

@@ -1,47 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { Card, Grid, Loader, Segment } from "semantic-ui-react";
+import { Card, Grid, Segment } from "semantic-ui-react";
 
 function Episodes() {
   const [episodes, setEpisodes] = useState([]);
   const [characterNames, setCharacterNames] = useState({});
-  const [allNamesFetched, setAllNamesFetched] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3001/episodes")
-      .then((res) => res.json())
-      .then((data) => setEpisodes(data))
-      .catch((error) => console.log(error));
-  }, []);
-
-  useEffect(() => {
-    let allNames = {};
-
+    // define an async function to fetch character names from API
     const fetchCharacterNames = async () => {
-      for (let i = 0; i < episodes.length; i++) {
-        const episode = episodes[i];
-
-        for (let j = 0; j < episode.characters.length; j++) {
-          const characterUrl = episode.characters[j];
-
-          const characterData = await fetch(characterUrl).then((res) =>
-            res.json()
-          );
-
-          allNames[characterData.id] = characterData.name;
-        }
+      try {
+        // fetch all episodes from the API
+        const episodesRes = await fetch("http://localhost:3001/episodes");
+        const episodesData = await episodesRes.json();
+        // set episodes in state with response data
+        setEpisodes(episodesData);
+  
+        // extract character URLs from all episodes
+        const characterUrls = episodesData.flatMap((episode) => episode.characters);
+        // fetch character data for all URLs in parallel
+        const characterResponses = await Promise.all(
+          characterUrls.map((url) => fetch(url))
+        );
+        // parse response data for all character data
+        const characterDataArray = await Promise.all(
+          characterResponses.map((res) => res.json())
+        );
+  
+        // use reduce to combine character names into a single object with character ID as the key
+        const allNames = characterDataArray.reduce((acc, characterData) => {
+          acc[characterData.id] = characterData.name;
+          return acc;
+        }, {});
+  
+        // set character names in state with allNames object
+        setCharacterNames(allNames);
+      } catch (error) {
+        console.log(error);
       }
-
-      setCharacterNames(allNames);
-      setAllNamesFetched(true);
     };
-
-    fetchCharacterNames().catch((error) => console.log(error));
-  }, [episodes]);
-
-  if (!allNamesFetched) {
-    return <Loader active>Loading...</Loader>;
-  }
-
+  
+    // call the fetchCharacterNames function when the component mounts
+    fetchCharacterNames();
+  }, []);
+  
   return (
     <div className="ui container">
       <Segment>
@@ -60,15 +61,15 @@ function Episodes() {
                     <p>Air date: {episode.air_date}</p>
                     <p>Characters:</p>
                     <ul>
-                      {episode.characters.map((characterUrl) => {
+                      {episode.characters.slice(0, 8).map((characterUrl) => {
                         const characterId = characterUrl.split("/").pop();
-                        const characterName = characterNames[characterId];
+                        const characterName = characterNames[characterId] || "";
                         return (
                           <li key={characterId}>
-                            {characterName ? characterName : ""}
+                            {characterName}
                           </li>
                         );
-                      }).slice(0, 8)}
+                      })}
                     </ul>
                   </Card.Description>
                 </Card.Content>
