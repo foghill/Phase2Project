@@ -1,26 +1,22 @@
 # Rick and Morty Wikipedia
 
-At its core, this web app is a minimal interface for searching across the TV show Rick and Morty's compendium including character data, locations and episode facts.
+This web app serves as a comprehensive and user-friendly interface for exploring the world of the popular TV show Rick and Morty. It allows users to search and browse various aspects of the show, including character information, locations, and episode details.
 
 ## Rick and Morty API
 
-All data comes from the [Rick and Morty API](https://rickandmortyapi.com/)
+All data is fetched from the [Rick and Morty API](https://rickandmortyapi.com/), which provides extensive information about the show's characters, locations, and episodes.
 
 A working demo of this app has been hosted on Netlify and can be [accessed here](https://rickandmortyflatiron.netlify.app/)
 
-The API is called in the App.js file using the useEffect hook and an [Immediately Invoked Function Expression](https://www.javascripttutorial.net/javascript-immediately-invoked-function-expression-iife/)
+The API is called within the App.js file using the useEffect hook and an [Immediately Invoked Function Expression](https://www.javascripttutorial.net/javascript-immediately-invoked-function-expression-iife/)
 
 The API returns three important resources in the object: Characters, Locations, Episodes.
 
-The API paginate's the response, and returns 20 records per page. [Pagination npm package](https://academind.com/tutorials/reactjs-pagination) was used to help build the navigation and interface.
+The API's response is paginated, returning 20 records per page. The Pagination npm package is used to facilitate navigation and handling of paginated data.
 
-## The npm packages used are:
+## Key Dependencies
 
-[Bootstrap](https://getbootstrap.com/)
-
-[Sass](https://www.npmjs.com/package/sass)
-
-Sass helps create custom stylesheets for components, here is how to [add sass to react](https://medium.com/nerd-for-tech/add-sass-to-your-react-app-in-2021-here-is-how-c7260c323a5a)
+[Semantic](https://semantic-ui.com/)
 
 [React-Router-DOM](https://www.npmjs.com/package/react-router-dom)
 
@@ -28,31 +24,36 @@ Sass helps create custom stylesheets for components, here is how to [add sass to
 
 Paginate is an awesome package which helps create a page navigation bar
 
-## App Breakdown
+## App Structure and Components
 
 ![](rickandmorty.gif)
-
 
 The web app is split up across a few different components including but not limited to:
 
 ### Homepage
 
-The Homepage is the entry point for the app, and acts as a Character page. A Filter component is displayed along the left column which allows a filter functionality to isolate across [Status,Species,Gender]
+The Homepage serves as the main entry point for the app and primarily focuses on character information. It features a Filter component that enables users to filter characters based on their status, species, and gender.
 
-A Navbar displays the other components: Episode and Location.
+A Navbar provides access to additional components, such as Episode and Location pages.
 
-A Searchbar component is also displayed, allowing the user to search for characters across the entire compendium.
+A Searchbar component allows users to search for specific characters throughout the entire dataset..
 
-### Characters Cards
+### CharacterContainer Component
 
-Clicking on a character will bring up another component: their specific character attributes
+The CharacterContainer component is responsible for displaying a grid of character cards based on the provided search term and handling pagination.
 
-This includes a dynamic button which renders green if the character is currently alive in the series, or red if the character is dead. The other attributes pulled from the API are Gender, Origin, Location and Species.
+javascript
 
-### Episode
+### Character Cards
 
-On this component, an accordion on the left hand side allows one to choose any episode across all 51. Depending on the episode chosen, the characters that appear in that particular episode will populate the page. Character cards can also be accessed through this interface.
+Clicking on a character displays a detailed Character Card, which includes dynamic elements such as a colored button indicating the character's current status (green for alive, red for dead). Other attributes displayed on the card include Gender, Origin, Location, and Species.
 
-### Location
+### Episode Page
 
-Similarly to the episode page, an accordion on the left hand page appears, this time allowing the user to select among all 126 known locations in the series. Once a location is chosen, all the characters currently residing in this particular location will populate, and can also be accessed directly through their Character Card.
+The Episode page offers a left-hand side accordion menu listing all 51 episodes. When an episode is selected, the page displays the characters that appear in that particular episode. Users can access individual Character Cards through this interface as well.
+
+### Location Page
+
+Similar to the Episode page, the Location page features a left-hand side accordion menu listing all 126 known locations in the series. Upon selecting a location, the page populates with the characters currently residing in that particular location. Users can access individual Character Cards directly from this view.
+
+By leveraging these components, the Rick and Morty Encyclopedia offers an intuitive and engaging way for fans to explore and learn about their favorite show.
